@@ -170,7 +170,7 @@
         <div class="app-title">Aceite · Montemar</div>
       </div>
     </div>
-    <div class="app-sub" id="fleet-count">52 coches</div>
+    <div class="app-sub" id="fleet-count">57 coches</div>
   </div>
   <div class="display-box">
     <div class="disp-num ph" id="disp-num">_ _ _ _</div>
@@ -263,7 +263,7 @@
 
 <script>
 const INTERVAL = 20000;
-const ALL_PLATES = ["717 LND","790 MZY","803 MZY","804 MZY","805 MZY","1649 KWN","1726 KWN","2311 KKH","2845 KWD","3383 NBH","3384 NBH","3386 NBH","4536 LRS","4583 MNL","4584 MNL","4613 MNL","4669 MNL","5597 JSC","5598 JSC","5932 NHX","6139 MGC","6141 MGC","6839 NCF","6852 KZD","6946 KVZ","7202 LTR","7210 LTR","7297 LRZ","7522 LYB","7526 LYB","7935 LYB","8081 KXZ","8082 KXZ","8084 KXZ","8104 JNT","8105 JNT","8106 JNT","8107 JNT","8267 MMW","8590 LXY","8878 KCG","9156 MHG","9259 JZV","9393 MHG","9573 NJG","9600 JGB","9808 KCG","9899 LSN","9903 LSN","9909 LSN","9924 LMV","9943 JTZ"];
+const ALL_PLATES = ["0717 LND","0790 MZY","0803 MZY","0804 MZY","0805 MZY","717 LND","790 MZY","803 MZY","804 MZY","805 MZY","1649 KWN","1726 KWN","2311 KKH","2845 KWD","3383 NBH","3384 NBH","3386 NBH","4536 LRS","4583 MNL","4584 MNL","4613 MNL","4669 MNL","5597 JSC","5598 JSC","5932 NHX","6139 MGC","6141 MGC","6839 NCF","6852 KZD","6946 KVZ","7202 LTR","7210 LTR","7297 LRZ","7522 LYB","7526 LYB","7935 LYB","8081 KXZ","8082 KXZ","8084 KXZ","8104 JNT","8105 JNT","8106 JNT","8107 JNT","8267 MMW","8590 LXY","8878 KCG","9156 MHG","9259 JZV","9393 MHG","9573 NJG","9600 JGB","9808 KCG","9899 LSN","9903 LSN","9909 LSN","9924 LMV","9943 JTZ"];
 
 function loadData() {
   try {
@@ -273,6 +273,10 @@ function loadData() {
   const d = {};
   ALL_PLATES.forEach(p => d[p] = { history: [], lastSeen: null });
   // Historial real del 717 LND desde Excel
+  d["0717 LND"].history = [
+    { km: 35827, date: "2023-02-22T10:00:00", type: "full" },
+    { km: 57542, date: "2024-05-08T10:00:00", type: "oil" }
+  ];
   d["717 LND"].history = [
     { km: 35827, date: "2023-02-22T10:00:00", type: "full" },
     { km: 57542, date: "2024-05-08T10:00:00", type: "oil" }

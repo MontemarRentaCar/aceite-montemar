@@ -512,14 +512,15 @@ function renderCar() {
   const hist = data[p] && data[p].history ? data[p].history : [];
   const evts = data[p] && data[p].events ? data[p].events : [];
   const allItems = [...hist.map(h => ({...h, _kind: 'oil'})), ...evts.map(e => ({...e, _kind: 'evt'}))].sort((a,b) => new Date(b.date) - new Date(a.date));
+  // Store allItems globally so openEdit can access by index
+  window._histItems = allItems;
   const histRows = allItems.length ? allItems.map((h, idx) => {
     let tag = '';
     if (h._kind === 'oil') tag = '<span class="hr-tag ' + (h.type === 'oil' ? 't-oil' : 't-full') + '">' + (h.type === 'oil' ? 'Aceite' : 'Aceite+Filtros') + '</span>';
     else tag = '<span class="hr-tag" style="background:#1e2a1e;color:#86efac;border:1px solid #166534">' + h.label + '</span>';
-    const eidx = h._origIdx !== undefined ? h._origIdx : idx;
     return '<div class="hist-row"><div><div class="hr-km">' + fmtKm(h.km) + '</div><div class="hr-date">' + fmtDate(h.date) + '</div></div>'
       + '<div class="hist-row-actions">' + tag
-      + '<button class="btn-edit" onclick="openEdit(' + JSON.stringify(h) + ')">&#9998;</button>'
+      + '<button class="btn-edit" onclick="openEdit(' + idx + ')">&#9998;</button>'
       + '</div></div>';
   }).join('') : '<div class="empty">Sin registros</div>';
   document.getElementById('car-content').innerHTML =
@@ -609,7 +610,8 @@ async function saveEvt() {
 let editEntry = null;
 let editQ = '';
 
-function openEdit(h) {
+function openEdit(idx) {
+  const h = window._histItems[idx];
   editEntry = h;
   editQ = String(h.km);
   document.getElementById('edit-km-disp').textContent = parseInt(h.km).toLocaleString('es-ES');

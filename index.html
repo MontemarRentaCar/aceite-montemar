@@ -511,7 +511,7 @@ function renderCar() {
   }
   const hist = data[p] && data[p].history ? data[p].history : [];
   const evts = data[p] && data[p].events ? data[p].events : [];
-  const allItems = [...hist.map(h => ({...h, _kind: 'oil'})), ...evts.map(e => ({...e, _kind: 'evt'}))].sort((a,b) => new Date(b.date) - new Date(a.date));
+  const allItems = [...hist.map(h => ({...h, _kind: 'oil'})), ...evts.map(e => ({...e, _kind: 'evt'}))].sort((a,b) => new Date(a.date) - new Date(b.date));
   // Store allItems globally so openEdit can access by index
   window._histItems = allItems;
   const histRows = allItems.length ? allItems.map((h, idx) => {
@@ -542,8 +542,9 @@ function updateKmDisp() {
   if (!kmQ) { d.textContent = '_ _ _ _ _ _'; d.className = 'km-disp ph'; btn.disabled = true; sub.textContent = 'Introduce los km del coche'; sub.className = 'km-sublabel'; return; }
   const val = parseInt(kmQ); d.textContent = val.toLocaleString('es-ES'); d.className = 'km-disp';
   const l = lastRev(curPlate);
-  if (l && val < l.km) { btn.disabled = true; sub.textContent = 'Menor que el ultimo cambio (' + fmtKm(l.km) + ')'; sub.className = 'km-sublabel err'; }
-  else { btn.disabled = false; sub.textContent = 'Km actuales del coche'; sub.className = 'km-sublabel'; }
+  if (l && val < l.km) { sub.textContent = 'Aviso: menor que el ultimo cambio (' + fmtKm(l.km) + ')'; sub.className = 'km-sublabel err'; }
+  else { sub.textContent = 'Km actuales del coche'; sub.className = 'km-sublabel'; }
+  btn.disabled = false;
 }
 async function confirmKm() {
   const km = parseInt(kmQ); if (!km) return;
@@ -566,12 +567,11 @@ function updateRevDisp() {
   const d = document.getElementById('rev-km-disp'), btn = document.getElementById('rev-save-btn');
   if (!revQ) { d.textContent = 'Introduce los km abajo'; d.className = 'rkd-val ph'; btn.disabled = true; return; }
   const val = parseInt(revQ); d.textContent = val.toLocaleString('es-ES') + ' km'; d.className = 'rkd-val';
-  const l = lastRev(curPlate); btn.disabled = !!(l && val <= l.km);
+  btn.disabled = false;
 }
 async function saveRev() {
   const km = parseInt(revQ); if (!km) return;
   const l = lastRev(curPlate);
-  if (l && km <= l.km) { alert('Los km deben ser mayores que el ultimo cambio (' + fmtKm(l.km) + ')'); return; }
   const revDate = getDate('rev-date-input');
   data[curPlate].history.push({ km: km, date: revDate, type: revType });
   data[curPlate].lastSeen = { km: km, date: revDate };

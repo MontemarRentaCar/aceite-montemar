@@ -429,13 +429,24 @@ async function saveToFirebase(plate) {
   }
 }
 
-function lastRev(p) { const h = data[p] && data[p].history ? data[p].history : []; return h.length ? h[h.length-1] : null; }
+function lastRev(p) {
+  const h = data[p] && data[p].history ? data[p].history : [];
+  if (!h.length) return null;
+  // Return the oil change with highest km
+  return h.reduce((max, cur) => cur.km > max.km ? cur : max, h[0]);
+}
 function nextType(p) { const l = lastRev(p); return l ? (l.type === 'oil' ? 'full' : 'oil') : 'oil'; }
 function getStatus(p) {
-  const l = lastRev(p); const seen = data[p] && data[p].lastSeen ? data[p].lastSeen : null;
-  if (!l) return { level: 'none', left: null, nextKm: null, currentKm: seen ? seen.km : null };
-  const curKm = seen ? seen.km : l.km;
-  const nextKm = l.km + INTERVAL; const left = nextKm - curKm;
+  const l = lastRev(p);
+  const hist = data[p] && data[p].history ? data[p].history : [];
+  const evts = data[p] && data[p].events ? data[p].events : [];
+  const seen = data[p] && data[p].lastSeen ? data[p].lastSeen : null;
+  // Current km = highest km across all records
+  const allKms = [...hist.map(h=>h.km), ...evts.map(e=>e.km), ...(seen?[seen.km]:[])];
+  const curKm = allKms.length ? Math.max(...allKms) : (l ? l.km : null);
+  if (!l) return { level: 'none', left: null, nextKm: null, currentKm: curKm };
+  const nextKm = l.km + INTERVAL;
+  const left = nextKm - curKm;
   return { level: left <= 0 ? 'due' : left <= 3000 ? 'warn' : 'ok', left, nextKm, currentKm: curKm };
 }
 function fmtDate(iso) { const d = new Date(iso); return d.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'UTC' }); }
@@ -511,7 +522,7 @@ function renderCar() {
   }
   const hist = data[p] && data[p].history ? data[p].history : [];
   const evts = data[p] && data[p].events ? data[p].events : [];
-  const allItems = [...hist.map(h => ({...h, _kind: 'oil'})), ...evts.map(e => ({...e, _kind: 'evt'}))].sort((a,b) => new Date(a.date) - new Date(b.date));
+  const allItems = [...hist.map(h => ({...h, _kind: 'oil'})), ...evts.map(e => ({...e, _kind: 'evt'}))].sort((a,b) => a.km - b.km);
   // Store allItems globally so openEdit can access by index
   window._histItems = allItems;
   const histRows = allItems.length ? allItems.map((h, idx) => {

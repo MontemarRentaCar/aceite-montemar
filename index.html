@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -29,114 +28,113 @@ html,body{height:100%;background:var(--bg);font-family:-apple-system,BlinkMacSys
 
 .hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
 .hdr-title{font-size:20px;font-weight:700;}
-.hdr-sub{font-size:13px;color:var(–text3);background:var(–s2);padding:5px 12px;border-radius:20px;}
+.hdr-sub{font-size:13px;color:var(--text3);background:var(--s2);padding:5px 12px;border-radius:20px;}
 
-.disp-box{background:var(–s1);border:1.5px solid var(–border2);border-radius:var(–radius);padding:20px 22px;margin-bottom:16px;min-height:88px;display:flex;flex-direction:column;justify-content:center;}
+.disp-box{background:var(--s1);border:1.5px solid var(--border2);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px;min-height:88px;display:flex;flex-direction:column;justify-content:center;}
 .disp-num{font-size:60px;font-weight:700;letter-spacing:8px;line-height:1;font-variant-numeric:tabular-nums;}
-.disp-num.ph{color:var(–text3);font-weight:300;font-size:40px;letter-spacing:5px;}
-.disp-hint{font-size:13px;color:var(–text2);margin-top:8px;}
+.disp-num.ph{color:var(--text3);font-weight:300;font-size:40px;letter-spacing:5px;}
+.disp-hint{font-size:13px;color:var(--text2);margin-top:8px;}
 
-.res-label{font-size:12px;color:var(–text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;min-height:18px;}
+.res-label{font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;min-height:18px;}
 .plates-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
-.plate-card{background:var(–s1);border:1.5px solid var(–border);border-radius:var(–radius-sm);padding:14px 16px;cursor:pointer;user-select:none;}
-.plate-card:active{background:var(–s2);}
+.plate-card{background:var(--s1);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;cursor:pointer;user-select:none;}
+.plate-card:active{background:var(--s2);}
 .pc-num{font-size:24px;font-weight:700;letter-spacing:2px;line-height:1;}
-.pc-meta{font-size:12px;color:var(–text3);margin-top:5px;}
+.pc-meta{font-size:12px;color:var(--text3);margin-top:5px;}
 .pc-badge{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-top:6px;}
-.b-ok{background:var(–green-bg);color:var(–green);border:1px solid var(–green-border);}
-.b-warn{background:var(–orange-bg);color:var(–orange);border:1px solid var(–orange-border);}
-.b-due{background:var(–red-bg);color:var(–red);border:1px solid var(–red-border);}
-.b-none{background:var(–s2);color:var(–text3);border:1px solid var(–border);}
+.b-ok{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border);}
+.b-warn{background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange-border);}
+.b-due{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border);}
+.b-none{background:var(--s2);color:var(--text3);border:1px solid var(--border);}
 
 .keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
-.key{background:var(–s1);border:1.5px solid var(–border);border-radius:var(–radius-sm);height:66px;font-size:30px;font-weight:600;cursor:pointer;color:var(–text);display:flex;align-items:center;justify-content:center;user-select:none;-webkit-touch-callout:none;}
-.key:active{transform:scale(0.90);background:var(–s3);}
-.key.sm{font-size:14px;font-weight:600;color:var(–text2);}
-.key.zero{background:var(–s2);}
+.key{background:var(--s1);border:1.5px solid var(--border);border-radius:var(--radius-sm);height:66px;font-size:30px;font-weight:600;cursor:pointer;color:var(--text);display:flex;align-items:center;justify-content:center;user-select:none;-webkit-touch-callout:none;}
+.key:active{transform:scale(0.90);background:var(--s3);}
+.key.sm{font-size:14px;font-weight:600;color:var(--text2);}
+.key.zero{background:var(--s2);}
 
 .nav-bar{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
-.back-btn{background:var(–s1);border:1.5px solid var(–border);border-radius:var(–radius-sm);padding:10px 18px;font-size:15px;font-weight:600;cursor:pointer;color:var(–text2);font-family:inherit;}
-.back-btn:active{background:var(–s2);}
+.back-btn{background:var(--s1);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 18px;font-size:15px;font-weight:600;cursor:pointer;color:var(--text2);font-family:inherit;}
+.back-btn:active{background:var(--s2);}
 .plate-hero{font-size:32px;font-weight:700;letter-spacing:4px;}
 
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
-.info-card{background:var(–s1);border:1.5px solid var(–border);border-radius:var(–radius-sm);padding:14px 16px;}
-.ic-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(–text3);margin-bottom:8px;}
+.info-card{background:var(--s1);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;}
+.ic-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:8px;}
 .ic-val{font-size:22px;font-weight:700;line-height:1.1;}
-.ic-sub{font-size:11px;color:var(–text3);margin-top:4px;line-height:1.4;}
-.ic-nodata{font-size:15px;color:var(–text3);}
+.ic-sub{font-size:11px;color:var(--text3);margin-top:4px;line-height:1.4;}
+.ic-nodata{font-size:15px;color:var(--text3);}
 .badge-type{display:inline-block;font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;margin-top:7px;}
-.badge-oil{background:var(–accent-bg);color:var(–accent);border:1px solid #2563eb;}
-.badge-full{background:var(–orange-bg);color:var(–orange);border:1px solid var(–orange-border);}
+.badge-oil{background:var(--accent-bg);color:var(--accent);border:1px solid #2563eb;}
+.badge-full{background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange-border);}
 
-.next-box{border-radius:var(–radius);padding:18px 20px;margin-bottom:14px;border:1.5px solid;}
-.next-box.ok{background:var(–green-bg);border-color:var(–green-border);}
-.next-box.warn{background:var(–orange-bg);border-color:var(–orange-border);}
-.next-box.due{background:var(–red-bg);border-color:var(–red-border);}
-.next-box.none{background:var(–s1);border-color:var(–border);}
+.next-box{border-radius:var(--radius);padding:18px 20px;margin-bottom:14px;border:1.5px solid;}
+.next-box.ok{background:var(--green-bg);border-color:var(--green-border);}
+.next-box.warn{background:var(--orange-bg);border-color:var(--orange-border);}
+.next-box.due{background:var(--red-bg);border-color:var(--red-border);}
+.next-box.none{background:var(--s1);border-color:var(--border);}
 .nb-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;opacity:0.7;}
-.next-box.ok .nb-label,.next-box.ok .nb-km,.next-box.ok .nb-desc,.next-box.ok .nb-sub{color:var(–green);}
-.next-box.warn .nb-label,.next-box.warn .nb-km,.next-box.warn .nb-desc,.next-box.warn .nb-sub{color:var(–orange);}
-.next-box.due .nb-label,.next-box.due .nb-km,.next-box.due .nb-desc,.next-box.due .nb-sub{color:var(–red);}
-.next-box.none .nb-label,.next-box.none .nb-km,.next-box.none .nb-desc,.next-box.none .nb-sub{color:var(–text3);}
+.next-box.ok .nb-label,.next-box.ok .nb-km,.next-box.ok .nb-desc,.next-box.ok .nb-sub{color:var(--green);}
+.next-box.warn .nb-label,.next-box.warn .nb-km,.next-box.warn .nb-desc,.next-box.warn .nb-sub{color:var(--orange);}
+.next-box.due .nb-label,.next-box.due .nb-km,.next-box.due .nb-desc,.next-box.due .nb-sub{color:var(--red);}
+.next-box.none .nb-label,.next-box.none .nb-km,.next-box.none .nb-desc,.next-box.none .nb-sub{color:var(--text3);}
 .nb-km{font-size:54px;font-weight:700;line-height:1;margin-bottom:4px;font-variant-numeric:tabular-nums;}
 .nb-desc{font-size:16px;font-weight:700;}
 .nb-sub{font-size:12px;margin-top:6px;opacity:0.75;}
 
 .prog-wrap{margin-bottom:16px;}
-.prog-labels{display:flex;justify-content:space-between;font-size:11px;color:var(–text3);margin-bottom:6px;}
-.prog-bg{height:8px;background:var(–s2);border-radius:4px;overflow:hidden;}
+.prog-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-bottom:6px;}
+.prog-bg{height:8px;background:var(--s2);border-radius:4px;overflow:hidden;}
 .prog-fill{height:100%;border-radius:4px;transition:width 0.5s ease;}
 
-.two-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px;}
-.action-btn{padding:18px 10px;border-radius:var(–radius-sm);font-size:15px;font-weight:700;cursor:pointer;text-align:center;border:1.5px solid;font-family:inherit;line-height:1.3;}
+.two-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.action-btn{padding:18px 10px;border-radius:var(--radius-sm);font-size:15px;font-weight:700;cursor:pointer;text-align:center;border:1.5px solid;font-family:inherit;line-height:1.3;}
 .action-btn:active{opacity:0.6;}
-.ab-km{background:var(–s1);border-color:var(–border2);color:var(–text);}
-.ab-rev{background:var(–accent);border-color:var(–accent);color:#fff;}
+.ab-km{background:var(--s1);border-color:var(--border2);color:var(--text);}
+.ab-rev{background:var(--accent);border-color:var(--accent);color:#fff;}
 .ab-sub{font-size:11px;font-weight:500;margin-top:4px;opacity:0.7;}
 
-.hist-title{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(–text3);margin-bottom:10px;}
+.hist-title{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:10px;}
 .hist-list{display:flex;flex-direction:column;gap:8px;}
-.hist-row{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border:1.5px solid var(–border);border-radius:var(–radius-sm);background:var(–s1);}
+.hist-row{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:var(--s1);}
 .hr-km{font-size:18px;font-weight:700;}
-.hr-date{font-size:11px;color:var(–text3);margin-top:2px;}
+.hr-date{font-size:11px;color:var(--text3);margin-top:2px;}
 .hr-tag{font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;white-space:nowrap;}
-.t-oil{background:var(–accent-bg);color:var(–accent);border:1px solid #2563eb;}
-.t-full{background:var(–orange-bg);color:var(–orange);border:1px solid var(–orange-border);}
+.t-oil{background:var(--accent-bg);color:var(--accent);border:1px solid #2563eb;}
+.t-full{background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange-border);}
 
-.km-disp-box{background:var(–s1);border:1.5px solid var(–border2);border-radius:var(–radius);padding:22px;margin-bottom:16px;min-height:96px;display:flex;flex-direction:column;justify-content:center;}
+.km-disp-box{background:var(--s1);border:1.5px solid var(--border2);border-radius:var(--radius);padding:22px;margin-bottom:16px;min-height:96px;display:flex;flex-direction:column;justify-content:center;}
 .km-disp{font-size:58px;font-weight:700;letter-spacing:4px;line-height:1;font-variant-numeric:tabular-nums;}
-.km-disp.ph{color:var(–text3);font-weight:300;font-size:36px;}
-.km-sublabel{font-size:13px;color:var(–text2);margin-top:8px;}
-.km-sublabel.err{color:var(–red);}
+.km-disp.ph{color:var(--text3);font-weight:300;font-size:36px;}
+.km-sublabel{font-size:13px;color:var(--text2);margin-top:8px;}
+.km-sublabel.err{color:var(--red);}
 
-.date-row{display:flex;align-items:center;justify-content:space-between;background:var(–s1);border:1.5px solid var(–border);border-radius:var(–radius-sm);padding:14px 18px;margin-bottom:14px;}
-.date-label{font-size:14px;font-weight:600;color:var(–text2);}
-.date-input{border:none;background:transparent;font-size:15px;font-weight:600;color:var(–text);font-family:inherit;outline:none;cursor:pointer;color-scheme:dark;}
+.date-row{display:flex;align-items:center;justify-content:space-between;background:var(--s1);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;margin-bottom:14px;}
+.date-label{font-size:14px;font-weight:600;color:var(--text2);}
+.date-input{border:none;background:transparent;font-size:15px;font-weight:600;color:var(--text);font-family:inherit;outline:none;cursor:pointer;color-scheme:dark;}
 
-.confirm-btn{width:100%;padding:20px;background:var(–accent);color:#fff;border:none;border-radius:var(–radius-sm);font-size:18px;font-weight:700;cursor:pointer;margin-bottom:16px;font-family:inherit;letter-spacing:0.3px;}
-.confirm-btn:active{background:var(–accent-d);}
-.confirm-btn:disabled{background:var(–s2);color:var(–text3);cursor:not-allowed;}
+.confirm-btn{width:100%;padding:20px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius-sm);font-size:18px;font-weight:700;cursor:pointer;margin-bottom:16px;font-family:inherit;letter-spacing:0.3px;}
+.confirm-btn:active{background:var(--accent-d);}
+.confirm-btn:disabled{background:var(--s2);color:var(--text3);cursor:not-allowed;}
 
-.hint-box{background:var(–s2);border-radius:var(–radius-sm);padding:14px 16px;font-size:14px;color:var(–text2);margin-bottom:14px;line-height:1.5;border:1.5px solid var(–border);}
-.rev-km-display{background:var(–s1);border:1.5px solid var(–border2);border-radius:var(–radius-sm);padding:16px 18px;margin-bottom:14px;}
-.rkd-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(–text3);margin-bottom:6px;}
+.hint-box{background:var(--s2);border-radius:var(--radius-sm);padding:14px 16px;font-size:14px;color:var(--text2);margin-bottom:14px;line-height:1.5;border:1.5px solid var(--border);}
+.rev-km-display{background:var(--s1);border:1.5px solid var(--border2);border-radius:var(--radius-sm);padding:16px 18px;margin-bottom:14px;}
+.rkd-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:6px;}
 .rkd-val{font-size:42px;font-weight:700;font-variant-numeric:tabular-nums;}
-.rkd-val.ph{color:var(–text3);font-size:20px;font-weight:400;}
+.rkd-val.ph{color:var(--text3);font-size:20px;font-weight:400;}
 
-.section-label{font-size:14px;font-weight:700;color:var(–text2);margin-bottom:8px;}
+.section-label{font-size:14px;font-weight:700;color:var(--text2);margin-bottom:8px;}
 .type-row{display:flex;gap:10px;margin-bottom:14px;}
-.type-btn{flex:1;padding:16px 8px;border:1.5px solid var(–border);border-radius:var(–radius-sm);background:var(–s1);cursor:pointer;font-size:15px;font-weight:700;color:var(–text2);text-align:center;font-family:inherit;}
-.type-btn.sel{border-color:var(–accent);background:var(–accent-bg);color:var(–accent);}
+.type-btn{flex:1;padding:16px 8px;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:var(--s1);cursor:pointer;font-size:15px;font-weight:700;color:var(--text2);text-align:center;font-family:inherit;}
+.type-btn.sel{border-color:var(--accent);background:var(--accent-bg);color:var(--accent);}
 .type-btn:active{opacity:0.7;}
-.empty{font-size:14px;color:var(–text3);padding:16px 0;text-align:center;}
-.evt-input{width:100%;padding:16px 18px;font-size:22px;font-weight:700;border:1.5px solid var(–border2);border-radius:var(–radius-sm);background:var(–s1);color:var(–text);font-family:inherit;outline:none;margin-bottom:14px;letter-spacing:0.5px;}
-.evt-input::placeholder{color:var(–text3);font-weight:400;font-size:18px;}
-.evt-input:focus{border-color:var(–accent);}
+.empty{font-size:14px;color:var(--text3);padding:16px 0;text-align:center;}
+.evt-input{width:100%;padding:16px 18px;font-size:22px;font-weight:700;border:1.5px solid var(--border2);border-radius:var(--radius-sm);background:var(--s1);color:var(--text);font-family:inherit;outline:none;margin-bottom:14px;letter-spacing:0.5px;}
+.evt-input::placeholder{color:var(--text3);font-weight:400;font-size:18px;}
+.evt-input:focus{border-color:var(--accent);}
 .evt-suggestions{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
-.evt-chip{background:var(–s2);border:1.5px solid var(–border);border-radius:20px;padding:8px 16px;font-size:13px;font-weight:600;color:var(–text2);cursor:pointer;}
-.evt-chip:active{background:var(–s3);}
-
+.evt-chip{background:var(--s2);border:1.5px solid var(--border);border-radius:20px;padding:8px 16px;font-size:13px;font-weight:600;color:var(--text2);cursor:pointer;}
+.evt-chip:active{background:var(--s3);}
 </style>
 </head>
 <body>
@@ -165,7 +163,7 @@ html,body{height:100%;background:var(--bg);font-family:-apple-system,BlinkMacSys
     <button class="key" ontouchstart="" onclick="kp('9')">9</button>
     <button class="key sm" ontouchstart="" onclick="kp('C')">BORRAR</button>
     <button class="key zero" ontouchstart="" onclick="kp('0')">0</button>
-    <button class="key sm" ontouchstart="" onclick="kp('DEL')">⌫</button>
+    <button class="key sm" ontouchstart="" onclick="kp('DEL')">&#x232B;</button>
   </div>
 </div>
 
@@ -197,7 +195,7 @@ html,body{height:100%;background:var(--bg);font-family:-apple-system,BlinkMacSys
     <button class="key" ontouchstart="" onclick="kpKm('9')">9</button>
     <button class="key sm" ontouchstart="" onclick="kpKm('C')">BORRAR</button>
     <button class="key zero" ontouchstart="" onclick="kpKm('0')">0</button>
-    <button class="key sm" ontouchstart="" onclick="kpKm('DEL')">⌫</button>
+    <button class="key sm" ontouchstart="" onclick="kpKm('DEL')">&#x232B;</button>
   </div>
 </div>
 
@@ -233,7 +231,7 @@ html,body{height:100%;background:var(--bg);font-family:-apple-system,BlinkMacSys
     <button class="key" ontouchstart="" onclick="kpRev('9')">9</button>
     <button class="key sm" ontouchstart="" onclick="kpRev('C')">BORRAR</button>
     <button class="key zero" ontouchstart="" onclick="kpRev('0')">0</button>
-    <button class="key sm" ontouchstart="" onclick="kpRev('DEL')">⌫</button>
+    <button class="key sm" ontouchstart="" onclick="kpRev('DEL')">&#x232B;</button>
   </div>
 </div>
 
@@ -247,14 +245,14 @@ html,body{height:100%;background:var(--bg);font-family:-apple-system,BlinkMacSys
     <div class="rkd-val ph" id="evt-km-disp">Introduce los km abajo</div>
   </div>
   <div class="section-label">¿Qué se ha hecho?</div>
-  <input class="evt-input" id="evt-text-input" type="text" placeholder="Ej: Batería, ITV, Pastillas..." maxlength="50" oninput="updateEvtSaveBtn()" />
+  <input class="evt-input" id="evt-text-input" type="text" placeholder="Ej: Batería, ITV, Pastillas..." maxlength="50" oninput="updateEvtSaveBtn()"/>
   <div class="evt-suggestions">
-    <div class="evt-chip" onclick="setEvtText('Batería')">🔋 Batería</div>
-    <div class="evt-chip" onclick="setEvtText('Pastillas')">🛑 Pastillas</div>
-    <div class="evt-chip" onclick="setEvtText('ITV')">📋 ITV</div>
-    <div class="evt-chip" onclick="setEvtText('Neumáticos')">⚫ Neumáticos</div>
-    <div class="evt-chip" onclick="setEvtText('Embrague')">⚙️ Embrague</div>
-    <div class="evt-chip" onclick="setEvtText('Frenos')">🔩 Frenos</div>
+    <div class="evt-chip" onclick="setEvtText('Batería')">&#128267; Batería</div>
+    <div class="evt-chip" onclick="setEvtText('Pastillas')">&#128721; Pastillas</div>
+    <div class="evt-chip" onclick="setEvtText('ITV')">&#128203; ITV</div>
+    <div class="evt-chip" onclick="setEvtText('Neumáticos')">&#9679; Neumáticos</div>
+    <div class="evt-chip" onclick="setEvtText('Embrague')">&#9881; Embrague</div>
+    <div class="evt-chip" onclick="setEvtText('Frenos')">&#128308; Frenos</div>
   </div>
   <div class="date-row">
     <div class="date-label">&#128197; Fecha</div>
@@ -273,179 +271,169 @@ html,body{height:100%;background:var(--bg);font-family:-apple-system,BlinkMacSys
     <button class="key" ontouchstart="" onclick="kpEvt('9')">9</button>
     <button class="key sm" ontouchstart="" onclick="kpEvt('C')">BORRAR</button>
     <button class="key zero" ontouchstart="" onclick="kpEvt('0')">0</button>
-    <button class="key sm" ontouchstart="" onclick="kpEvt('DEL')">⌫</button>
+    <button class="key sm" ontouchstart="" onclick="kpEvt('DEL')">&#x232B;</button>
   </div>
 </div>
+
 </div>
 <script>
 const INTERVAL=20000;
 const ALL_PLATES=["0717 LND","0790 MZY","0803 MZY","0804 MZY","0805 MZY","1649 KWN","1726 KWN","2311 KKH","2845 KWD","3383 NBH","3384 NBH","3386 NBH","4536 LRS","4583 MNL","4584 MNL","4613 MNL","4669 MNL","5597 JSC","5598 JSC","5932 NHX","6139 MGC","6141 MGC","6839 NCF","6852 KZD","6946 KVZ","7202 LTR","7210 LTR","7297 LRZ","7522 LYB","7526 LYB","7935 LYB","8081 KXZ","8082 KXZ","8084 KXZ","8104 JNT","8105 JNT","8106 JNT","8107 JNT","8267 MMW","8590 LXY","8878 KCG","9156 MHG","9259 JZV","9393 MHG","9573 NJG","9600 JGB","9808 KCG","9899 LSN","9903 LSN","9909 LSN","9924 LMV","9943 JTZ"];
 
 function loadData(){
-try{const s=localStorage.getItem(‘montemar_oil_v3’);if(s)return JSON.parse(s);}catch(e){}
-const d={};
-ALL_PLATES.forEach(p=>d[p]={history:[],lastSeen:null});
-d[“0717 LND”].history=[{km:35827,date:“2023-02-22T10:00:00”,type:“full”},{km:57542,date:“2024-05-08T10:00:00”,type:“oil”}];
-return d;
+  try{const s=localStorage.getItem('montemar_oil_v3');if(s)return JSON.parse(s);}catch(e){}
+  const d={};
+  ALL_PLATES.forEach(p=>d[p]={history:[],lastSeen:null});
+  d["0717 LND"].history=[{km:35827,date:"2023-02-22T10:00:00",type:"full"},{km:57542,date:"2024-05-08T10:00:00",type:"oil"}];
+  return d;
 }
 let data=loadData();
-function save(){try{localStorage.setItem(‘montemar_oil_v3’,JSON.stringify(data));}catch(e){}}
+function save(){try{localStorage.setItem('montemar_oil_v3',JSON.stringify(data));}catch(e){}}
 function lastRev(p){const h=data[p]&&data[p].history?data[p].history:[];return h.length?h[h.length-1]:null;}
-function nextType(p){const l=lastRev(p);return l?(l.type===‘oil’?‘full’:‘oil’):‘oil’;}
+function nextType(p){const l=lastRev(p);return l?(l.type==='oil'?'full':'oil'):'oil';}
 function getStatus(p){
-const l=lastRev(p);const seen=data[p]&&data[p].lastSeen?data[p].lastSeen:null;
-if(!l)return{level:‘none’,left:null,nextKm:null,currentKm:seen?seen.km:null};
-const curKm=seen?seen.km:l.km;const nextKm=l.km+INTERVAL;const left=nextKm-curKm;
-return{level:left<=0?‘due’:left<=3000?‘warn’:‘ok’,left,nextKm,currentKm:curKm};
+  const l=lastRev(p);const seen=data[p]&&data[p].lastSeen?data[p].lastSeen:null;
+  if(!l)return{level:'none',left:null,nextKm:null,currentKm:seen?seen.km:null};
+  const curKm=seen?seen.km:l.km;const nextKm=l.km+INTERVAL;const left=nextKm-curKm;
+  return{level:left<=0?'due':left<=3000?'warn':'ok',left,nextKm,currentKm:curKm};
 }
-function fmtDate(iso){const d=new Date(iso);return d.toLocaleDateString(‘es-ES’,{day:‘2-digit’,month:‘2-digit’,year:‘numeric’,timeZone:‘UTC’});}
-function fmtKm(n){return parseInt(n).toLocaleString(‘es-ES’)+’ km’;}
-function localDT(){const d=new Date(),pad=n=>String(n).padStart(2,‘0’);return d.getFullYear()+’-’+pad(d.getMonth()+1)+’-’+pad(d.getDate());}
+function fmtDate(iso){const d=new Date(iso);return d.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit',year:'numeric',timeZone:'UTC'});}
+function fmtKm(n){return parseInt(n).toLocaleString('es-ES')+' km';}
+function localDT(){const d=new Date(),pad=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
 function getDate(id){const v=document.getElementById(id).value;return v?new Date(v).toISOString():new Date().toISOString();}
 
-let sq=’’;
-function kp(k){if(k===‘C’)sq=’’;else if(k===‘DEL’)sq=sq.slice(0,-1);else if(sq.length<4)sq+=k;updateSearch();}
+let sq='';
+function kp(k){if(k==='C')sq='';else if(k==='DEL')sq=sq.slice(0,-1);else if(sq.length<4)sq+=k;updateSearch();}
 function updateSearch(){
-const dn=document.getElementById(‘disp-num’),dh=document.getElementById(‘disp-hint’),rl=document.getElementById(‘res-label’),pg=document.getElementById(‘plates-grid’);
-if(!sq){dn.textContent=’_ _ _ _’;dn.className=‘disp-num ph’;dh.textContent=‘Introduce los números de la matrícula’;rl.textContent=’’;pg.innerHTML=’’;return;}
-dn.textContent=sq;dn.className=‘disp-num’;
-const m=ALL_PLATES.filter(p=>p.split(’ ‘)[0].startsWith(sq));
-dh.textContent=m.length?m.length+’ matrícula’+(m.length>1?‘s’:’’)+’ encontrada’+(m.length>1?‘s’:’’):‘Sin resultados’;
-rl.textContent=m.length?‘Selecciona:’:’’;
-pg.innerHTML=m.map(plate=>{
-const st=getStatus(plate),l=lastRev(plate);
-const bc=st.level===‘none’?‘b-none’:st.level===‘due’?‘b-due’:st.level===‘warn’?‘b-warn’:‘b-ok’;
-const bt=st.level===‘none’?‘Sin datos’:st.left<=0?’¡Toca ya!’:st.left.toLocaleString(‘es-ES’)+’ km’;
-return ‘<div class="plate-card" onclick="openCar(\''+plate+'\')"><div class="pc-num">’+plate+’</div><div class="pc-meta">’+(l?fmtKm(l.km):‘Sin revisiones’)+’</div><span class="pc-badge '+bc+'">’+bt+’</span></div>’;
-}).join(’’);
+  const dn=document.getElementById('disp-num'),dh=document.getElementById('disp-hint'),rl=document.getElementById('res-label'),pg=document.getElementById('plates-grid');
+  if(!sq){dn.textContent='_ _ _ _';dn.className='disp-num ph';dh.textContent='Introduce los números de la matrícula';rl.textContent='';pg.innerHTML='';return;}
+  dn.textContent=sq;dn.className='disp-num';
+  const m=ALL_PLATES.filter(p=>p.split(' ')[0].startsWith(sq));
+  dh.textContent=m.length?m.length+' matrícula'+(m.length>1?'s':'')+' encontrada'+(m.length>1?'s':''):'Sin resultados';
+  rl.textContent=m.length?'Selecciona:':'';
+  pg.innerHTML=m.map(plate=>{
+    const st=getStatus(plate),l=lastRev(plate);
+    const bc=st.level==='none'?'b-none':st.level==='due'?'b-due':st.level==='warn'?'b-warn':'b-ok';
+    const bt=st.level==='none'?'Sin datos':st.left<=0?'Toca ya!':st.left.toLocaleString('es-ES')+' km';
+    return '<div class="plate-card" onclick="openCar(\''+plate+'\')"><div class="pc-num">'+plate+'</div><div class="pc-meta">'+(l?fmtKm(l.km):'Sin revisiones')+'</div><span class="pc-badge '+bc+'">'+bt+'</span></div>';
+  }).join('');
 }
 
-let curPlate=’’;
-function openCar(p){curPlate=p;goTo(‘s-car’);renderCar();}
+let curPlate='';
+function openCar(p){curPlate=p;goTo('s-car');renderCar();}
 function renderCar(){
-const p=curPlate,l=lastRev(p),seen=data[p]&&data[p].lastSeen?data[p].lastSeen:null,st=getStatus(p),nt=nextType(p);
-const ntLabel=nt===‘oil’?‘cambio de aceite’:‘cambio completo (aceite + filtros)’;
-const barColor=st.level===‘due’?’#f87171’:st.level===‘warn’?’#f59e0b’:’#22c55e’;
-const pct=l&&seen?Math.min(100,Math.max(0,(seen.km-l.km)/INTERVAL*100)):0;
-const typeBadge=l?’<span class="badge-type '+(l.type==='oil'?'badge-oil':'badge-full')+'">’+(l.type===‘oil’?‘SOLO ACEITE’:‘COMPLETO’)+’</span>’:’’;
-const lastRevHtml=l?’<div class="ic-val">’+fmtKm(l.km)+’</div><div class="ic-sub">’+fmtDate(l.date)+’</div>’+typeBadge:’<div class="ic-nodata">Sin datos</div>’;
-const lastSeenHtml=seen?’<div class="ic-val">’+fmtKm(seen.km)+’</div><div class="ic-sub">’+fmtDate(seen.date)+’</div>’:’<div class="ic-nodata">Sin revisar</div>’;
-let nbClass=‘none’,nbKm=’—’,nbDesc=‘Introduce km para calcular’,nbSub=’’;
-if(st.level!==‘none’){
-nbClass=st.level;nbKm=st.left<=0?’¡YA!’:st.left.toLocaleString(‘es-ES’)+’ km’;
-nbDesc=st.left<=0?’¡Toca ‘+ntLabel+’!’:‘Para ‘+ntLabel;
-nbSub=‘Prox. a los ‘+st.nextKm.toLocaleString(‘es-ES’)+’ km · Ahora: ‘+st.currentKm.toLocaleString(‘es-ES’)+’ km’;
-}
-const hist=data[p]&&data[p].history?data[p].history:[];
-const evts=data[p]&&data[p].events?data[p].events:[];
-const allItems=[…hist.map(h=>({…h,_kind:‘oil’})),…evts.map(e=>({…e,_kind:‘evt’}))].sort((a,b)=>new Date(b.date)-new Date(a.date));
-const histRows=allItems.length?allItems.map(h=>{
-let tag=’’;
-if(h._kind===‘oil’) tag=’<span class="hr-tag '+(h.type==='oil'?'t-oil':'t-full')+'">’+(h.type===‘oil’?‘Aceite’:‘Aceite+Filtros’)+’</span>’;
-else tag=’<span class="hr-tag" style="background:#1e2a1e;color:#86efac;border:1px solid #166534">’+h.label+’</span>’;
-return ‘<div class="hist-row"><div><div class="hr-km">’+fmtKm(h.km)+’</div><div class="hr-date">’+fmtDate(h.date)+’</div></div>’+tag+’</div>’;
-}).join(’’):’<div class="empty">Sin registros</div>’;
-document.getElementById(‘car-content’).innerHTML=
-‘<div class="nav-bar"><button class="back-btn" onclick="goBack()">← Volver</button><div class="plate-hero">’+p+’</div></div>’
-+’<div class="info-grid"><div class="info-card"><div class="ic-label">Último cambio</div>’+lastRevHtml+’</div><div class="info-card"><div class="ic-label">Última lectura km</div>’+lastSeenHtml+’</div></div>’
-+’<div class="next-box '+nbClass+'"><div class="nb-label">Próxima revisión</div><div class="nb-km">’+nbKm+’</div><div class="nb-desc">’+nbDesc+’</div>’+(nbSub?’<div class="nb-sub">’+nbSub+’</div>’:’’)+’</div>’
-+’<div class="prog-wrap"><div class="prog-labels"><span>’+(l?fmtKm(l.km):’—’)+’</span><span>+20.000 km</span></div><div class="prog-bg"><div class="prog-fill" style="width:'+pct+'%;background:'+barColor+'"></div></div></div>’
-+’<div class="two-actions"><button class="action-btn ab-km" onclick="goKm()">📍 Ver km<div class="ab-sub">Actualizar lectura</div></button><button class="action-btn ab-rev" onclick="goRev()">🔧 Cambio aceite<div class="ab-sub">Registrar servicio</div></button></div>’
-+’<button class="action-btn ab-km" style="width:100%;margin-bottom:20px;" onclick="goEvt()">+ Añadir evento<div class="ab-sub">Batería, ITV, Pastillas…</div></button>’
-+’<div class="hist-title">Historial de cambios</div><div class="hist-list">’+histRows+’</div>’;
+  const p=curPlate,l=lastRev(p),seen=data[p]&&data[p].lastSeen?data[p].lastSeen:null,st=getStatus(p),nt=nextType(p);
+  const ntLabel=nt==='oil'?'cambio de aceite':'cambio completo (aceite + filtros)';
+  const barColor=st.level==='due'?'#f87171':st.level==='warn'?'#f59e0b':'#22c55e';
+  const pct=l&&seen?Math.min(100,Math.max(0,(seen.km-l.km)/INTERVAL*100)):0;
+  const typeBadge=l?'<span class="badge-type '+(l.type==='oil'?'badge-oil':'badge-full')+'">'+(l.type==='oil'?'SOLO ACEITE':'COMPLETO')+'</span>':'';
+  const lastRevHtml=l?'<div class="ic-val">'+fmtKm(l.km)+'</div><div class="ic-sub">'+fmtDate(l.date)+'</div>'+typeBadge:'<div class="ic-nodata">Sin datos</div>';
+  const lastSeenHtml=seen?'<div class="ic-val">'+fmtKm(seen.km)+'</div><div class="ic-sub">'+fmtDate(seen.date)+'</div>':'<div class="ic-nodata">Sin revisar</div>';
+  let nbClass='none',nbKm='&mdash;',nbDesc='Introduce km para calcular',nbSub='';
+  if(st.level!=='none'){
+    nbClass=st.level;
+    nbKm=st.left<=0?'YA!':st.left.toLocaleString('es-ES')+' km';
+    nbDesc=st.left<=0?'Toca '+ntLabel+'!':'Para '+ntLabel;
+    nbSub='Prox. a los '+st.nextKm.toLocaleString('es-ES')+' km - Ahora: '+st.currentKm.toLocaleString('es-ES')+' km';
+  }
+  const hist=data[p]&&data[p].history?data[p].history:[];
+  const evts=data[p]&&data[p].events?data[p].events:[];
+  const allItems=[...hist.map(h=>({...h,_kind:'oil'})),...evts.map(e=>({...e,_kind:'evt'}))].sort((a,b)=>new Date(b.date)-new Date(a.date));
+  const histRows=allItems.length?allItems.map(h=>{
+    let tag='';
+    if(h._kind==='oil') tag='<span class="hr-tag '+(h.type==='oil'?'t-oil':'t-full')+'">'+(h.type==='oil'?'Aceite':'Aceite+Filtros')+'</span>';
+    else tag='<span class="hr-tag" style="background:#1e2a1e;color:#86efac;border:1px solid #166534">'+h.label+'</span>';
+    return '<div class="hist-row"><div><div class="hr-km">'+fmtKm(h.km)+'</div><div class="hr-date">'+fmtDate(h.date)+'</div></div>'+tag+'</div>';
+  }).join(''):'<div class="empty">Sin registros</div>';
+  document.getElementById('car-content').innerHTML=
+    '<div class="nav-bar"><button class="back-btn" onclick="goBack()">&#8592; Volver</button><div class="plate-hero">'+p+'</div></div>'
+    +'<div class="info-grid"><div class="info-card"><div class="ic-label">Ultimo cambio</div>'+lastRevHtml+'</div><div class="info-card"><div class="ic-label">Ultima lectura km</div>'+lastSeenHtml+'</div></div>'
+    +'<div class="next-box '+nbClass+'"><div class="nb-label">Proxima revision</div><div class="nb-km">'+nbKm+'</div><div class="nb-desc">'+nbDesc+'</div>'+(nbSub?'<div class="nb-sub">'+nbSub+'</div>':'')+'</div>'
+    +'<div class="prog-wrap"><div class="prog-labels"><span>'+(l?fmtKm(l.km):'&mdash;')+'</span><span>+20.000 km</span></div><div class="prog-bg"><div class="prog-fill" style="width:'+pct+'%;background:'+barColor+'"></div></div></div>'
+    +'<div class="two-actions"><button class="action-btn ab-km" onclick="goKm()">&#128205; Ver km<div class="ab-sub">Actualizar lectura</div></button><button class="action-btn ab-rev" onclick="goRev()">&#128295; Cambio aceite<div class="ab-sub">Registrar servicio</div></button></div>'
+    +'<button class="action-btn ab-km" style="width:100%;margin-bottom:20px;" onclick="goEvt()">+ Añadir evento<div class="ab-sub">Bateria, ITV, Pastillas...</div></button>'
+    +'<div class="hist-title">Historial</div><div class="hist-list">'+histRows+'</div>';
 }
 
-let kmQ=’’;
-function goKm(){kmQ=’’;document.getElementById(‘km-plate-label’).textContent=curPlate;document.getElementById(‘km-date-input’).value=localDT();updateKmDisp();goTo(‘s-km’);}
-function kpKm(k){if(k===‘C’)kmQ=’’;else if(k===‘DEL’)kmQ=kmQ.slice(0,-1);else if(kmQ.length<7)kmQ+=k;updateKmDisp();}
+let kmQ='';
+function goKm(){kmQ='';document.getElementById('km-plate-label').textContent=curPlate;document.getElementById('km-date-input').value=localDT();updateKmDisp();goTo('s-km');}
+function kpKm(k){if(k==='C')kmQ='';else if(k==='DEL')kmQ=kmQ.slice(0,-1);else if(kmQ.length<7)kmQ+=k;updateKmDisp();}
 function updateKmDisp(){
-const d=document.getElementById(‘km-disp’),btn=document.getElementById(‘km-confirm-btn’),sub=document.getElementById(‘km-sublabel’);
-if(!kmQ){d.textContent=’_ _ _ _ _ _’;d.className=‘km-disp ph’;btn.disabled=true;sub.textContent=‘Introduce los km del coche’;sub.className=‘km-sublabel’;return;}
-const val=parseInt(kmQ);d.textContent=val.toLocaleString(‘es-ES’);d.className=‘km-disp’;
-const l=lastRev(curPlate);
-if(l&&val<l.km){btn.disabled=true;sub.textContent=‘Menor que el último cambio (’+fmtKm(l.km)+’)’;sub.className=‘km-sublabel err’;}
-else{btn.disabled=false;sub.textContent=‘Km actuales del coche’;sub.className=‘km-sublabel’;}
+  const d=document.getElementById('km-disp'),btn=document.getElementById('km-confirm-btn'),sub=document.getElementById('km-sublabel');
+  if(!kmQ){d.textContent='_ _ _ _ _ _';d.className='km-disp ph';btn.disabled=true;sub.textContent='Introduce los km del coche';sub.className='km-sublabel';return;}
+  const val=parseInt(kmQ);d.textContent=val.toLocaleString('es-ES');d.className='km-disp';
+  const l=lastRev(curPlate);
+  if(l&&val<l.km){btn.disabled=true;sub.textContent='Menor que el ultimo cambio ('+fmtKm(l.km)+')';sub.className='km-sublabel err';}
+  else{btn.disabled=false;sub.textContent='Km actuales del coche';sub.className='km-sublabel';}
 }
 function confirmKm(){
-const km=parseInt(kmQ);if(!km)return;
-if(!data[curPlate])data[curPlate]={history:[],lastSeen:null};
-data[curPlate].lastSeen={km:km,date:getDate(‘km-date-input’)};
-save();goTo(‘s-car’);renderCar();
+  const km=parseInt(kmQ);if(!km)return;
+  if(!data[curPlate])data[curPlate]={history:[],lastSeen:null};
+  data[curPlate].lastSeen={km:km,date:getDate('km-date-input')};
+  save();goTo('s-car');renderCar();
 }
 
-let revQ=’’,revType=’’;
+let revQ='',revType='';
 function goRev(){
-revQ=’’;revType=nextType(curPlate);
-document.getElementById(‘rev-plate-label’).textContent=curPlate;
-const nt=nextType(curPlate);
-document.getElementById(‘rev-hint’).textContent=‘Siguiente sugerido: ‘+(nt===‘oil’?‘Solo aceite’:‘Aceite + Filtros’)+’. Cambia si es necesario.’;
-selRevType(nt);document.getElementById(‘rev-date-input’).value=localDT();updateRevDisp();goTo(‘s-rev’);
+  revQ='';revType=nextType(curPlate);
+  document.getElementById('rev-plate-label').textContent=curPlate;
+  const nt=nextType(curPlate);
+  document.getElementById('rev-hint').textContent='Siguiente sugerido: '+(nt==='oil'?'Solo aceite':'Aceite + Filtros')+'. Cambia si es necesario.';
+  selRevType(nt);document.getElementById('rev-date-input').value=localDT();updateRevDisp();goTo('s-rev');
 }
-function kpRev(k){if(k===‘C’)revQ=’’;else if(k===‘DEL’)revQ=revQ.slice(0,-1);else if(revQ.length<7)revQ+=k;updateRevDisp();}
-function selRevType(t){revType=t;document.getElementById(‘rbtn-oil’).className=‘type-btn’+(t===‘oil’?’ sel’:’’);document.getElementById(‘rbtn-full’).className=‘type-btn’+(t===‘full’?’ sel’:’’);}
+function kpRev(k){if(k==='C')revQ='';else if(k==='DEL')revQ=revQ.slice(0,-1);else if(revQ.length<7)revQ+=k;updateRevDisp();}
+function selRevType(t){revType=t;document.getElementById('rbtn-oil').className='type-btn'+(t==='oil'?' sel':'');document.getElementById('rbtn-full').className='type-btn'+(t==='full'?' sel':'');}
 function updateRevDisp(){
-const d=document.getElementById(‘rev-km-disp’),btn=document.getElementById(‘rev-save-btn’);
-if(!revQ){d.textContent=‘Introduce los km abajo’;d.className=‘rkd-val ph’;btn.disabled=true;return;}
-const val=parseInt(revQ);d.textContent=val.toLocaleString(‘es-ES’)+’ km’;d.className=‘rkd-val’;
-const l=lastRev(curPlate);btn.disabled=!!(l&&val<=l.km);
+  const d=document.getElementById('rev-km-disp'),btn=document.getElementById('rev-save-btn');
+  if(!revQ){d.textContent='Introduce los km abajo';d.className='rkd-val ph';btn.disabled=true;return;}
+  const val=parseInt(revQ);d.textContent=val.toLocaleString('es-ES')+' km';d.className='rkd-val';
+  const l=lastRev(curPlate);btn.disabled=!!(l&&val<=l.km);
 }
 function saveRev(){
-const km=parseInt(revQ);if(!km)return;
-const l=lastRev(curPlate);
-if(l&&km<=l.km){alert(‘Los km deben ser mayores que el último cambio (’+fmtKm(l.km)+’)’);return;}
-if(!data[curPlate])data[curPlate]={history:[],lastSeen:null};
-const revDate=getDate(‘rev-date-input’);
-data[curPlate].history.push({km:km,date:revDate,type:revType});
-data[curPlate].lastSeen={km:km,date:revDate};
-save();goTo(‘s-car’);renderCar();
+  const km=parseInt(revQ);if(!km)return;
+  const l=lastRev(curPlate);
+  if(l&&km<=l.km){alert('Los km deben ser mayores que el ultimo cambio ('+fmtKm(l.km)+')');return;}
+  if(!data[curPlate])data[curPlate]={history:[],lastSeen:null};
+  const revDate=getDate('rev-date-input');
+  data[curPlate].history.push({km:km,date:revDate,type:revType});
+  data[curPlate].lastSeen={km:km,date:revDate};
+  save();goTo('s-car');renderCar();
 }
 
-/* EVENT */
-let evtQ=’’;
+let evtQ='';
 function goEvt(){
-evtQ=’’;
-document.getElementById(‘evt-plate-label’).textContent=curPlate;
-document.getElementById(‘evt-date-input’).value=localDT();
-document.getElementById(‘evt-text-input’).value=’’;
-document.getElementById(‘evt-save-btn’).disabled=true;
-updateEvtDisp();
-goTo(‘s-evt’);
+  evtQ='';
+  document.getElementById('evt-plate-label').textContent=curPlate;
+  document.getElementById('evt-date-input').value=localDT();
+  document.getElementById('evt-text-input').value='';
+  document.getElementById('evt-save-btn').disabled=true;
+  updateEvtDisp();goTo('s-evt');
 }
-function setEvtText(t){
-document.getElementById(‘evt-text-input’).value=t;
-updateEvtSaveBtn();
-}
-function kpEvt(k){
-if(k===‘C’)evtQ=’’;
-else if(k===‘DEL’)evtQ=evtQ.slice(0,-1);
-else if(evtQ.length<7)evtQ+=k;
-updateEvtDisp();
-}
+function setEvtText(t){document.getElementById('evt-text-input').value=t;updateEvtSaveBtn();}
+function kpEvt(k){if(k==='C')evtQ='';else if(k==='DEL')evtQ=evtQ.slice(0,-1);else if(evtQ.length<7)evtQ+=k;updateEvtDisp();}
 function updateEvtDisp(){
-const d=document.getElementById(‘evt-km-disp’);
-if(!evtQ){d.textContent=‘Introduce los km abajo’;d.className=‘rkd-val ph’;}
-else{d.textContent=parseInt(evtQ).toLocaleString(‘es-ES’)+’ km’;d.className=‘rkd-val’;}
-updateEvtSaveBtn();
+  const d=document.getElementById('evt-km-disp');
+  if(!evtQ){d.textContent='Introduce los km abajo';d.className='rkd-val ph';}
+  else{d.textContent=parseInt(evtQ).toLocaleString('es-ES')+' km';d.className='rkd-val';}
+  updateEvtSaveBtn();
 }
 function updateEvtSaveBtn(){
-const km=parseInt(evtQ);
-const txt=document.getElementById(‘evt-text-input’).value.trim();
-document.getElementById(‘evt-save-btn’).disabled=!(km>0&&txt.length>0);
+  const km=parseInt(evtQ),txt=document.getElementById('evt-text-input').value.trim();
+  document.getElementById('evt-save-btn').disabled=!(km>0&&txt.length>0);
 }
 function saveEvt(){
-const km=parseInt(evtQ);if(!km)return;
-const txt=document.getElementById(‘evt-text-input’).value.trim();if(!txt)return;
-if(!data[curPlate])data[curPlate]={history:[],lastSeen:null,events:[]};
-if(!data[curPlate].events)data[curPlate].events=[];
-data[curPlate].events.push({km:km,date:getDate(‘evt-date-input’),label:txt});
-data[curPlate].lastSeen={km:km,date:getDate(‘evt-date-input’)};
-save();goTo(‘s-car’);renderCar();
+  const km=parseInt(evtQ);if(!km)return;
+  const txt=document.getElementById('evt-text-input').value.trim();if(!txt)return;
+  if(!data[curPlate])data[curPlate]={history:[],lastSeen:null,events:[]};
+  if(!data[curPlate].events)data[curPlate].events=[];
+  data[curPlate].events.push({km:km,date:getDate('evt-date-input'),label:txt});
+  data[curPlate].lastSeen={km:km,date:getDate('evt-date-input')};
+  save();goTo('s-car');renderCar();
 }
 
-function goTo(id){document.querySelectorAll(’.screen’).forEach(s=>s.classList.remove(‘active’));document.getElementById(id).classList.add(‘active’);window.scrollTo(0,0);}
-function goBack(){sq=’’;goTo(‘s-search’);updateSearch();}
+function goTo(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
+function goBack(){sq='';goTo('s-search');updateSearch();}
 updateSearch();
 </script>
-
 </body>
 </html>

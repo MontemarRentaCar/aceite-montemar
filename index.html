@@ -26,9 +26,16 @@ html,body{height:100%;background:var(--bg);font-family:-apple-system,BlinkMacSys
 .screen.active{display:block;}
 @keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
+/* SYNC INDICATOR */
+.sync-dot{width:8px;height:8px;border-radius:50%;background:var(--text3);display:inline-block;margin-left:6px;vertical-align:middle;transition:background 0.3s;}
+.sync-dot.ok{background:var(--green);}
+.sync-dot.syncing{background:var(--orange);animation:pulse 1s infinite;}
+.sync-dot.err{background:var(--red);}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+
 .hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
 .hdr-title{font-size:20px;font-weight:700;}
-.hdr-sub{font-size:13px;color:var(--text3);background:var(--s2);padding:5px 12px;border-radius:20px;}
+.hdr-sub{font-size:13px;color:var(--text3);background:var(--s2);padding:5px 12px;border-radius:20px;display:flex;align-items:center;}
 
 .disp-box{background:var(--s1);border:1.5px solid var(--border2);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px;min-height:88px;display:flex;flex-direction:column;justify-content:center;}
 .disp-num{font-size:60px;font-weight:700;letter-spacing:8px;line-height:1;font-variant-numeric:tabular-nums;}
@@ -48,8 +55,8 @@ html,body{height:100%;background:var(--bg);font-family:-apple-system,BlinkMacSys
 .b-none{background:var(--s2);color:var(--text3);border:1px solid var(--border);}
 
 .keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
-.key{background:var(--s1);border:1.5px solid var(--border);border-radius:var(--radius-sm);height:66px;font-size:30px;font-weight:600;cursor:pointer;color:var(--text);display:flex;align-items:center;justify-content:center;user-select:none;-webkit-touch-callout:none;}
-.key:active{transform:scale(0.90);background:var(--s3);}
+.key{background:var(--s1);border:1.5px solid var(--border);border-radius:var(--radius-sm);height:66px;font-size:30px;font-weight:600;cursor:pointer;color:var(--text);display:flex;align-items:center;justify-content:center;user-select:none;-webkit-touch-callout:none;transition:transform 0.07s,background 0.07s;}
+.key:active,.key.pressed{transform:scale(0.90);background:var(--s3);}
 .key.sm{font-size:14px;font-weight:600;color:var(--text2);}
 .key.zero{background:var(--s2);}
 
@@ -113,7 +120,7 @@ html,body{height:100%;background:var(--bg);font-family:-apple-system,BlinkMacSys
 .date-label{font-size:14px;font-weight:600;color:var(--text2);}
 .date-input{border:none;background:transparent;font-size:15px;font-weight:600;color:var(--text);font-family:inherit;outline:none;cursor:pointer;color-scheme:dark;}
 
-.confirm-btn{width:100%;padding:20px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius-sm);font-size:18px;font-weight:700;cursor:pointer;margin-bottom:16px;font-family:inherit;letter-spacing:0.3px;}
+.confirm-btn{width:100%;padding:20px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius-sm);font-size:18px;font-weight:700;cursor:pointer;margin-bottom:16px;font-family:inherit;}
 .confirm-btn:active{background:var(--accent-d);}
 .confirm-btn:disabled{background:var(--s2);color:var(--text3);cursor:not-allowed;}
 
@@ -135,15 +142,25 @@ html,body{height:100%;background:var(--bg);font-family:-apple-system,BlinkMacSys
 .evt-suggestions{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
 .evt-chip{background:var(--s2);border:1.5px solid var(--border);border-radius:20px;padding:8px 16px;font-size:13px;font-weight:600;color:var(--text2);cursor:pointer;}
 .evt-chip:active{background:var(--s3);}
+.loading-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100dvh;gap:16px;color:var(--text2);font-size:15px;}
+.spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
 <div class="app">
 
-<div id="s-search" class="screen active">
+<div id="s-loading" class="screen active">
+  <div class="loading-screen">
+    <div class="spinner"></div>
+    <div>Conectando...</div>
+  </div>
+</div>
+
+<div id="s-search" class="screen">
   <div class="hdr">
     <div class="hdr-title">&#9881; Aceite · Montemar</div>
-    <div class="hdr-sub">52 coches</div>
+    <div class="hdr-sub">52 coches <span class="sync-dot" id="sync-dot"></span></div>
   </div>
   <div class="disp-box">
     <div class="disp-num ph" id="disp-num">_ _ _ _</div>
@@ -276,164 +293,280 @@ html,body{height:100%;background:var(--bg);font-family:-apple-system,BlinkMacSys
 </div>
 
 </div>
-<script>
-const INTERVAL=20000;
-const ALL_PLATES=["0717 LND","0790 MZY","0803 MZY","0804 MZY","0805 MZY","1649 KWN","1726 KWN","2311 KKH","2845 KWD","3383 NBH","3384 NBH","3386 NBH","4536 LRS","4583 MNL","4584 MNL","4613 MNL","4669 MNL","5597 JSC","5598 JSC","5932 NHX","6139 MGC","6141 MGC","6839 NCF","6852 KZD","6946 KVZ","7202 LTR","7210 LTR","7297 LRZ","7522 LYB","7526 LYB","7935 LYB","8081 KXZ","8082 KXZ","8084 KXZ","8104 JNT","8105 JNT","8106 JNT","8107 JNT","8267 MMW","8590 LXY","8878 KCG","9156 MHG","9259 JZV","9393 MHG","9573 NJG","9600 JGB","9808 KCG","9899 LSN","9903 LSN","9909 LSN","9924 LMV","9943 JTZ"];
 
-function loadData(){
-  try{const s=localStorage.getItem('montemar_oil_v3');if(s)return JSON.parse(s);}catch(e){}
-  const d={};
-  ALL_PLATES.forEach(p=>d[p]={history:[],lastSeen:null});
-  d["0717 LND"].history=[{km:35827,date:"2023-02-22T10:00:00",type:"full"},{km:57542,date:"2024-05-08T10:00:00",type:"oil"}];
-  return d;
-}
-let data=loadData();
-function save(){try{localStorage.setItem('montemar_oil_v3',JSON.stringify(data));}catch(e){}}
-function lastRev(p){const h=data[p]&&data[p].history?data[p].history:[];return h.length?h[h.length-1]:null;}
-function nextType(p){const l=lastRev(p);return l?(l.type==='oil'?'full':'oil'):'oil';}
-function getStatus(p){
-  const l=lastRev(p);const seen=data[p]&&data[p].lastSeen?data[p].lastSeen:null;
-  if(!l)return{level:'none',left:null,nextKm:null,currentKm:seen?seen.km:null};
-  const curKm=seen?seen.km:l.km;const nextKm=l.km+INTERVAL;const left=nextKm-curKm;
-  return{level:left<=0?'due':left<=3000?'warn':'ok',left,nextKm,currentKm:curKm};
-}
-function fmtDate(iso){const d=new Date(iso);return d.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit',year:'numeric',timeZone:'UTC'});}
-function fmtKm(n){return parseInt(n).toLocaleString('es-ES')+' km';}
-function localDT(){const d=new Date(),pad=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
-function getDate(id){const v=document.getElementById(id).value;return v?new Date(v).toISOString():new Date().toISOString();}
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
 
-let sq='';
-function kp(k){if(k==='C')sq='';else if(k==='DEL')sq=sq.slice(0,-1);else if(sq.length<4)sq+=k;updateSearch();}
-function updateSearch(){
-  const dn=document.getElementById('disp-num'),dh=document.getElementById('disp-hint'),rl=document.getElementById('res-label'),pg=document.getElementById('plates-grid');
-  if(!sq){dn.textContent='_ _ _ _';dn.className='disp-num ph';dh.textContent='Introduce los números de la matrícula';rl.textContent='';pg.innerHTML='';return;}
-  dn.textContent=sq;dn.className='disp-num';
-  const m=ALL_PLATES.filter(p=>p.split(' ')[0].startsWith(sq));
-  dh.textContent=m.length?m.length+' matrícula'+(m.length>1?'s':'')+' encontrada'+(m.length>1?'s':''):'Sin resultados';
-  rl.textContent=m.length?'Selecciona:':'';
-  pg.innerHTML=m.map(plate=>{
-    const st=getStatus(plate),l=lastRev(plate);
-    const bc=st.level==='none'?'b-none':st.level==='due'?'b-due':st.level==='warn'?'b-warn':'b-ok';
-    const bt=st.level==='none'?'Sin datos':st.left<=0?'Toca ya!':st.left.toLocaleString('es-ES')+' km';
-    return '<div class="plate-card" onclick="openCar(\''+plate+'\')"><div class="pc-num">'+plate+'</div><div class="pc-meta">'+(l?fmtKm(l.km):'Sin revisiones')+'</div><span class="pc-badge '+bc+'">'+bt+'</span></div>';
+const firebaseConfig = {
+  apiKey: "AIzaSyBbRTwLBz0-QPRNbKr7DCZIZFicYN_ZsGo",
+  authDomain: "aceite-montemar.firebaseapp.com",
+  projectId: "aceite-montemar",
+  storageBucket: "aceite-montemar.firebasestorage.app",
+  messagingSenderId: "336278231777",
+  appId: "1:336278231777:web:90b72ad404731d4e2275a0"
+};
+
+const fbApp = initializeApp(firebaseConfig);
+const db = getFirestore(fbApp);
+
+const INTERVAL = 20000;
+const ALL_PLATES = ["0717 LND","0790 MZY","0803 MZY","0804 MZY","0805 MZY","1649 KWN","1726 KWN","2311 KKH","2845 KWD","3383 NBH","3384 NBH","3386 NBH","4536 LRS","4583 MNL","4584 MNL","4613 MNL","4669 MNL","5597 JSC","5598 JSC","5932 NHX","6139 MGC","6141 MGC","6839 NCF","6852 KZD","6946 KVZ","7202 LTR","7210 LTR","7297 LRZ","7522 LYB","7526 LYB","7935 LYB","8081 KXZ","8082 KXZ","8084 KXZ","8104 JNT","8105 JNT","8106 JNT","8107 JNT","8267 MMW","8590 LXY","8878 KCG","9156 MHG","9259 JZV","9393 MHG","9573 NJG","9600 JGB","9808 KCG","9899 LSN","9903 LSN","9909 LSN","9924 LMV","9943 JTZ"];
+
+// In-memory cache updated by Firestore listeners
+let data = {};
+ALL_PLATES.forEach(p => data[p] = { history: [], lastSeen: null, events: [] });
+
+function setSyncDot(state) {
+  const d = document.getElementById('sync-dot');
+  if (d) { d.className = 'sync-dot ' + state; }
+}
+
+// Plate ID safe for Firestore (replace spaces)
+function pid(p) { return p.replace(' ', '_'); }
+function fromPid(id) { return id.replace('_', ' '); }
+
+// Listen to ALL plates in real time
+function startListeners() {
+  setSyncDot('syncing');
+  let loaded = 0;
+  ALL_PLATES.forEach(plate => {
+    const ref = doc(db, 'coches', pid(plate));
+    onSnapshot(ref, snap => {
+      if (snap.exists()) {
+        const d = snap.data();
+        data[plate] = {
+          history: d.history || [],
+          lastSeen: d.lastSeen || null,
+          events: d.events || []
+        };
+      }
+      loaded++;
+      if (loaded === ALL_PLATES.length) {
+        setSyncDot('ok');
+        goTo('s-search');
+        updateSearch();
+      }
+      // If car screen open for this plate, refresh it
+      if (curPlate === plate) renderCar();
+      // Refresh search results
+      if (document.getElementById('s-search').classList.contains('active')) updateSearch();
+    }, () => {
+      loaded++;
+      if (loaded === ALL_PLATES.length) {
+        setSyncDot('err');
+        goTo('s-search');
+        updateSearch();
+      }
+    });
+  });
+}
+
+async function saveToFirebase(plate) {
+  setSyncDot('syncing');
+  try {
+    await setDoc(doc(db, 'coches', pid(plate)), {
+      history: data[plate].history || [],
+      lastSeen: data[plate].lastSeen || null,
+      events: data[plate].events || []
+    });
+    setSyncDot('ok');
+  } catch(e) {
+    setSyncDot('err');
+    console.error(e);
+  }
+}
+
+function lastRev(p) { const h = data[p] && data[p].history ? data[p].history : []; return h.length ? h[h.length-1] : null; }
+function nextType(p) { const l = lastRev(p); return l ? (l.type === 'oil' ? 'full' : 'oil') : 'oil'; }
+function getStatus(p) {
+  const l = lastRev(p); const seen = data[p] && data[p].lastSeen ? data[p].lastSeen : null;
+  if (!l) return { level: 'none', left: null, nextKm: null, currentKm: seen ? seen.km : null };
+  const curKm = seen ? seen.km : l.km;
+  const nextKm = l.km + INTERVAL; const left = nextKm - curKm;
+  return { level: left <= 0 ? 'due' : left <= 3000 ? 'warn' : 'ok', left, nextKm, currentKm: curKm };
+}
+function fmtDate(iso) { const d = new Date(iso); return d.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'UTC' }); }
+function fmtKm(n) { return parseInt(n).toLocaleString('es-ES') + ' km'; }
+function localDT() { const d = new Date(), pad = n => String(n).padStart(2, '0'); return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()); }
+function getDate(id) { const v = document.getElementById(id).value; return v ? new Date(v).toISOString() : new Date().toISOString(); }
+
+// ---- KEYBOARD SUPPORT (PC) ----
+let activeKpMode = null; // 'search' | 'km' | 'rev' | 'evt'
+document.addEventListener('keydown', e => {
+  const key = e.key;
+  if (key >= '0' && key <= '9') {
+    if (activeKpMode === 'search') kp(key);
+    else if (activeKpMode === 'km') kpKm(key);
+    else if (activeKpMode === 'rev') kpRev(key);
+    else if (activeKpMode === 'evt') kpEvt(key);
+  } else if (key === 'Backspace') {
+    if (activeKpMode === 'search') kp('DEL');
+    else if (activeKpMode === 'km') kpKm('DEL');
+    else if (activeKpMode === 'rev') kpRev('DEL');
+    else if (activeKpMode === 'evt') kpEvt('DEL');
+  } else if (key === 'Escape') {
+    if (activeKpMode === 'search') kp('C');
+    else if (activeKpMode === 'km') kpKm('C');
+    else if (activeKpMode === 'rev') kpRev('C');
+    else if (activeKpMode === 'evt') kpEvt('C');
+  } else if (key === 'Enter') {
+    if (activeKpMode === 'km') confirmKm();
+    else if (activeKpMode === 'rev') saveRev();
+    else if (activeKpMode === 'evt') saveEvt();
+  }
+});
+
+// ---- SEARCH ----
+let sq = '';
+function kp(k) { if (k === 'C') sq = ''; else if (k === 'DEL') sq = sq.slice(0,-1); else if (sq.length < 4) sq += k; updateSearch(); }
+function updateSearch() {
+  const dn = document.getElementById('disp-num'), dh = document.getElementById('disp-hint'), rl = document.getElementById('res-label'), pg = document.getElementById('plates-grid');
+  if (!sq) { dn.textContent = '_ _ _ _'; dn.className = 'disp-num ph'; dh.textContent = 'Introduce los números de la matrícula'; rl.textContent = ''; pg.innerHTML = ''; return; }
+  dn.textContent = sq; dn.className = 'disp-num';
+  const m = ALL_PLATES.filter(p => p.split(' ')[0].startsWith(sq));
+  dh.textContent = m.length ? m.length + ' matrícula' + (m.length > 1 ? 's' : '') + ' encontrada' + (m.length > 1 ? 's' : '') : 'Sin resultados';
+  rl.textContent = m.length ? 'Selecciona:' : '';
+  pg.innerHTML = m.map(plate => {
+    const st = getStatus(plate), l = lastRev(plate);
+    const bc = st.level === 'none' ? 'b-none' : st.level === 'due' ? 'b-due' : st.level === 'warn' ? 'b-warn' : 'b-ok';
+    const bt = st.level === 'none' ? 'Sin datos' : st.left <= 0 ? 'Toca ya!' : st.left.toLocaleString('es-ES') + ' km';
+    return '<div class="plate-card" onclick="openCar(\'' + plate + '\')"><div class="pc-num">' + plate + '</div><div class="pc-meta">' + (l ? fmtKm(l.km) : 'Sin revisiones') + '</div><span class="pc-badge ' + bc + '">' + bt + '</span></div>';
   }).join('');
 }
 
-let curPlate='';
-function openCar(p){curPlate=p;goTo('s-car');renderCar();}
-function renderCar(){
-  const p=curPlate,l=lastRev(p),seen=data[p]&&data[p].lastSeen?data[p].lastSeen:null,st=getStatus(p),nt=nextType(p);
-  const ntLabel=nt==='oil'?'cambio de aceite':'cambio completo (aceite + filtros)';
-  const barColor=st.level==='due'?'#f87171':st.level==='warn'?'#f59e0b':'#22c55e';
-  const pct=l&&seen?Math.min(100,Math.max(0,(seen.km-l.km)/INTERVAL*100)):0;
-  const typeBadge=l?'<span class="badge-type '+(l.type==='oil'?'badge-oil':'badge-full')+'">'+(l.type==='oil'?'SOLO ACEITE':'COMPLETO')+'</span>':'';
-  const lastRevHtml=l?'<div class="ic-val">'+fmtKm(l.km)+'</div><div class="ic-sub">'+fmtDate(l.date)+'</div>'+typeBadge:'<div class="ic-nodata">Sin datos</div>';
-  const lastSeenHtml=seen?'<div class="ic-val">'+fmtKm(seen.km)+'</div><div class="ic-sub">'+fmtDate(seen.date)+'</div>':'<div class="ic-nodata">Sin revisar</div>';
-  let nbClass='none',nbKm='&mdash;',nbDesc='Introduce km para calcular',nbSub='';
-  if(st.level!=='none'){
-    nbClass=st.level;
-    nbKm=st.left<=0?'YA!':st.left.toLocaleString('es-ES')+' km';
-    nbDesc=st.left<=0?'Toca '+ntLabel+'!':'Para '+ntLabel;
-    nbSub='Prox. a los '+st.nextKm.toLocaleString('es-ES')+' km - Ahora: '+st.currentKm.toLocaleString('es-ES')+' km';
+// ---- CAR ----
+let curPlate = '';
+function openCar(p) { curPlate = p; goTo('s-car'); renderCar(); }
+function renderCar() {
+  const p = curPlate, l = lastRev(p), seen = data[p] && data[p].lastSeen ? data[p].lastSeen : null, st = getStatus(p), nt = nextType(p);
+  const ntLabel = nt === 'oil' ? 'cambio de aceite' : 'cambio completo (aceite + filtros)';
+  const barColor = st.level === 'due' ? '#f87171' : st.level === 'warn' ? '#f59e0b' : '#22c55e';
+  const pct = l && seen ? Math.min(100, Math.max(0, (seen.km - l.km) / INTERVAL * 100)) : 0;
+  const typeBadge = l ? '<span class="badge-type ' + (l.type === 'oil' ? 'badge-oil' : 'badge-full') + '">' + (l.type === 'oil' ? 'SOLO ACEITE' : 'COMPLETO') + '</span>' : '';
+  const lastRevHtml = l ? '<div class="ic-val">' + fmtKm(l.km) + '</div><div class="ic-sub">' + fmtDate(l.date) + '</div>' + typeBadge : '<div class="ic-nodata">Sin datos</div>';
+  const lastSeenHtml = seen ? '<div class="ic-val">' + fmtKm(seen.km) + '</div><div class="ic-sub">' + fmtDate(seen.date) + '</div>' : '<div class="ic-nodata">Sin revisar</div>';
+  let nbClass = 'none', nbKm = '&mdash;', nbDesc = 'Introduce km para calcular', nbSub = '';
+  if (st.level !== 'none') {
+    nbClass = st.level;
+    nbKm = st.left <= 0 ? 'YA!' : st.left.toLocaleString('es-ES') + ' km';
+    nbDesc = st.left <= 0 ? 'Toca ' + ntLabel + '!' : 'Para ' + ntLabel;
+    nbSub = 'Prox. a los ' + st.nextKm.toLocaleString('es-ES') + ' km - Ahora: ' + st.currentKm.toLocaleString('es-ES') + ' km';
   }
-  const hist=data[p]&&data[p].history?data[p].history:[];
-  const evts=data[p]&&data[p].events?data[p].events:[];
-  const allItems=[...hist.map(h=>({...h,_kind:'oil'})),...evts.map(e=>({...e,_kind:'evt'}))].sort((a,b)=>new Date(b.date)-new Date(a.date));
-  const histRows=allItems.length?allItems.map(h=>{
-    let tag='';
-    if(h._kind==='oil') tag='<span class="hr-tag '+(h.type==='oil'?'t-oil':'t-full')+'">'+(h.type==='oil'?'Aceite':'Aceite+Filtros')+'</span>';
-    else tag='<span class="hr-tag" style="background:#1e2a1e;color:#86efac;border:1px solid #166534">'+h.label+'</span>';
-    return '<div class="hist-row"><div><div class="hr-km">'+fmtKm(h.km)+'</div><div class="hr-date">'+fmtDate(h.date)+'</div></div>'+tag+'</div>';
-  }).join(''):'<div class="empty">Sin registros</div>';
-  document.getElementById('car-content').innerHTML=
-    '<div class="nav-bar"><button class="back-btn" onclick="goBack()">&#8592; Volver</button><div class="plate-hero">'+p+'</div></div>'
-    +'<div class="info-grid"><div class="info-card"><div class="ic-label">Ultimo cambio</div>'+lastRevHtml+'</div><div class="info-card"><div class="ic-label">Ultima lectura km</div>'+lastSeenHtml+'</div></div>'
-    +'<div class="next-box '+nbClass+'"><div class="nb-label">Proxima revision</div><div class="nb-km">'+nbKm+'</div><div class="nb-desc">'+nbDesc+'</div>'+(nbSub?'<div class="nb-sub">'+nbSub+'</div>':'')+'</div>'
-    +'<div class="prog-wrap"><div class="prog-labels"><span>'+(l?fmtKm(l.km):'&mdash;')+'</span><span>+20.000 km</span></div><div class="prog-bg"><div class="prog-fill" style="width:'+pct+'%;background:'+barColor+'"></div></div></div>'
-    +'<div class="two-actions"><button class="action-btn ab-km" onclick="goKm()">&#128205; Ver km<div class="ab-sub">Actualizar lectura</div></button><button class="action-btn ab-rev" onclick="goRev()">&#128295; Cambio aceite<div class="ab-sub">Registrar servicio</div></button></div>'
-    +'<button class="action-btn ab-km" style="width:100%;margin-bottom:20px;" onclick="goEvt()">+ Añadir evento<div class="ab-sub">Bateria, ITV, Pastillas...</div></button>'
-    +'<div class="hist-title">Historial</div><div class="hist-list">'+histRows+'</div>';
+  const hist = data[p] && data[p].history ? data[p].history : [];
+  const evts = data[p] && data[p].events ? data[p].events : [];
+  const allItems = [...hist.map(h => ({...h, _kind: 'oil'})), ...evts.map(e => ({...e, _kind: 'evt'}))].sort((a,b) => new Date(b.date) - new Date(a.date));
+  const histRows = allItems.length ? allItems.map(h => {
+    let tag = '';
+    if (h._kind === 'oil') tag = '<span class="hr-tag ' + (h.type === 'oil' ? 't-oil' : 't-full') + '">' + (h.type === 'oil' ? 'Aceite' : 'Aceite+Filtros') + '</span>';
+    else tag = '<span class="hr-tag" style="background:#1e2a1e;color:#86efac;border:1px solid #166534">' + h.label + '</span>';
+    return '<div class="hist-row"><div><div class="hr-km">' + fmtKm(h.km) + '</div><div class="hr-date">' + fmtDate(h.date) + '</div></div>' + tag + '</div>';
+  }).join('') : '<div class="empty">Sin registros</div>';
+  document.getElementById('car-content').innerHTML =
+    '<div class="nav-bar"><button class="back-btn" onclick="goBack()">&#8592; Volver</button><div class="plate-hero">' + p + '</div></div>'
+    + '<div class="info-grid"><div class="info-card"><div class="ic-label">Ultimo cambio</div>' + lastRevHtml + '</div><div class="info-card"><div class="ic-label">Ultima lectura km</div>' + lastSeenHtml + '</div></div>'
+    + '<div class="next-box ' + nbClass + '"><div class="nb-label">Proxima revision</div><div class="nb-km">' + nbKm + '</div><div class="nb-desc">' + nbDesc + '</div>' + (nbSub ? '<div class="nb-sub">' + nbSub + '</div>' : '') + '</div>'
+    + '<div class="prog-wrap"><div class="prog-labels"><span>' + (l ? fmtKm(l.km) : '&mdash;') + '</span><span>+20.000 km</span></div><div class="prog-bg"><div class="prog-fill" style="width:' + pct + '%;background:' + barColor + '"></div></div></div>'
+    + '<div class="two-actions"><button class="action-btn ab-km" onclick="goKm()">&#128205; Ver km<div class="ab-sub">Actualizar lectura</div></button><button class="action-btn ab-rev" onclick="goRev()">&#128295; Cambio aceite<div class="ab-sub">Registrar servicio</div></button></div>'
+    + '<button class="action-btn ab-km" style="width:100%;margin-bottom:20px;" onclick="goEvt()">+ Añadir evento<div class="ab-sub">Bateria, ITV, Pastillas...</div></button>'
+    + '<div class="hist-title">Historial</div><div class="hist-list">' + histRows + '</div>';
 }
 
-let kmQ='';
-function goKm(){kmQ='';document.getElementById('km-plate-label').textContent=curPlate;document.getElementById('km-date-input').value=localDT();updateKmDisp();goTo('s-km');}
-function kpKm(k){if(k==='C')kmQ='';else if(k==='DEL')kmQ=kmQ.slice(0,-1);else if(kmQ.length<7)kmQ+=k;updateKmDisp();}
-function updateKmDisp(){
-  const d=document.getElementById('km-disp'),btn=document.getElementById('km-confirm-btn'),sub=document.getElementById('km-sublabel');
-  if(!kmQ){d.textContent='_ _ _ _ _ _';d.className='km-disp ph';btn.disabled=true;sub.textContent='Introduce los km del coche';sub.className='km-sublabel';return;}
-  const val=parseInt(kmQ);d.textContent=val.toLocaleString('es-ES');d.className='km-disp';
-  const l=lastRev(curPlate);
-  if(l&&val<l.km){btn.disabled=true;sub.textContent='Menor que el ultimo cambio ('+fmtKm(l.km)+')';sub.className='km-sublabel err';}
-  else{btn.disabled=false;sub.textContent='Km actuales del coche';sub.className='km-sublabel';}
+// ---- KM ----
+let kmQ = '';
+function goKm() { kmQ = ''; document.getElementById('km-plate-label').textContent = curPlate; document.getElementById('km-date-input').value = localDT(); updateKmDisp(); goTo('s-km'); }
+function kpKm(k) { if (k === 'C') kmQ = ''; else if (k === 'DEL') kmQ = kmQ.slice(0,-1); else if (kmQ.length < 7) kmQ += k; updateKmDisp(); }
+function updateKmDisp() {
+  const d = document.getElementById('km-disp'), btn = document.getElementById('km-confirm-btn'), sub = document.getElementById('km-sublabel');
+  if (!kmQ) { d.textContent = '_ _ _ _ _ _'; d.className = 'km-disp ph'; btn.disabled = true; sub.textContent = 'Introduce los km del coche'; sub.className = 'km-sublabel'; return; }
+  const val = parseInt(kmQ); d.textContent = val.toLocaleString('es-ES'); d.className = 'km-disp';
+  const l = lastRev(curPlate);
+  if (l && val < l.km) { btn.disabled = true; sub.textContent = 'Menor que el ultimo cambio (' + fmtKm(l.km) + ')'; sub.className = 'km-sublabel err'; }
+  else { btn.disabled = false; sub.textContent = 'Km actuales del coche'; sub.className = 'km-sublabel'; }
 }
-function confirmKm(){
-  const km=parseInt(kmQ);if(!km)return;
-  if(!data[curPlate])data[curPlate]={history:[],lastSeen:null};
-  data[curPlate].lastSeen={km:km,date:getDate('km-date-input')};
-  save();goTo('s-car');renderCar();
-}
-
-let revQ='',revType='';
-function goRev(){
-  revQ='';revType=nextType(curPlate);
-  document.getElementById('rev-plate-label').textContent=curPlate;
-  const nt=nextType(curPlate);
-  document.getElementById('rev-hint').textContent='Siguiente sugerido: '+(nt==='oil'?'Solo aceite':'Aceite + Filtros')+'. Cambia si es necesario.';
-  selRevType(nt);document.getElementById('rev-date-input').value=localDT();updateRevDisp();goTo('s-rev');
-}
-function kpRev(k){if(k==='C')revQ='';else if(k==='DEL')revQ=revQ.slice(0,-1);else if(revQ.length<7)revQ+=k;updateRevDisp();}
-function selRevType(t){revType=t;document.getElementById('rbtn-oil').className='type-btn'+(t==='oil'?' sel':'');document.getElementById('rbtn-full').className='type-btn'+(t==='full'?' sel':'');}
-function updateRevDisp(){
-  const d=document.getElementById('rev-km-disp'),btn=document.getElementById('rev-save-btn');
-  if(!revQ){d.textContent='Introduce los km abajo';d.className='rkd-val ph';btn.disabled=true;return;}
-  const val=parseInt(revQ);d.textContent=val.toLocaleString('es-ES')+' km';d.className='rkd-val';
-  const l=lastRev(curPlate);btn.disabled=!!(l&&val<=l.km);
-}
-function saveRev(){
-  const km=parseInt(revQ);if(!km)return;
-  const l=lastRev(curPlate);
-  if(l&&km<=l.km){alert('Los km deben ser mayores que el ultimo cambio ('+fmtKm(l.km)+')');return;}
-  if(!data[curPlate])data[curPlate]={history:[],lastSeen:null};
-  const revDate=getDate('rev-date-input');
-  data[curPlate].history.push({km:km,date:revDate,type:revType});
-  data[curPlate].lastSeen={km:km,date:revDate};
-  save();goTo('s-car');renderCar();
+async function confirmKm() {
+  const km = parseInt(kmQ); if (!km) return;
+  data[curPlate].lastSeen = { km: km, date: getDate('km-date-input') };
+  await saveToFirebase(curPlate);
+  goTo('s-car'); renderCar();
 }
 
-let evtQ='';
-function goEvt(){
-  evtQ='';
-  document.getElementById('evt-plate-label').textContent=curPlate;
-  document.getElementById('evt-date-input').value=localDT();
-  document.getElementById('evt-text-input').value='';
-  document.getElementById('evt-save-btn').disabled=true;
-  updateEvtDisp();goTo('s-evt');
+// ---- REV ----
+let revQ = '', revType = '';
+function goRev() {
+  revQ = ''; revType = nextType(curPlate);
+  document.getElementById('rev-plate-label').textContent = curPlate;
+  document.getElementById('rev-hint').textContent = 'Siguiente sugerido: ' + (revType === 'oil' ? 'Solo aceite' : 'Aceite + Filtros') + '. Cambia si es necesario.';
+  selRevType(revType); document.getElementById('rev-date-input').value = localDT(); updateRevDisp(); goTo('s-rev');
 }
-function setEvtText(t){document.getElementById('evt-text-input').value=t;updateEvtSaveBtn();}
-function kpEvt(k){if(k==='C')evtQ='';else if(k==='DEL')evtQ=evtQ.slice(0,-1);else if(evtQ.length<7)evtQ+=k;updateEvtDisp();}
-function updateEvtDisp(){
-  const d=document.getElementById('evt-km-disp');
-  if(!evtQ){d.textContent='Introduce los km abajo';d.className='rkd-val ph';}
-  else{d.textContent=parseInt(evtQ).toLocaleString('es-ES')+' km';d.className='rkd-val';}
+function kpRev(k) { if (k === 'C') revQ = ''; else if (k === 'DEL') revQ = revQ.slice(0,-1); else if (revQ.length < 7) revQ += k; updateRevDisp(); }
+function selRevType(t) { revType = t; document.getElementById('rbtn-oil').className = 'type-btn' + (t === 'oil' ? ' sel' : ''); document.getElementById('rbtn-full').className = 'type-btn' + (t === 'full' ? ' sel' : ''); }
+function updateRevDisp() {
+  const d = document.getElementById('rev-km-disp'), btn = document.getElementById('rev-save-btn');
+  if (!revQ) { d.textContent = 'Introduce los km abajo'; d.className = 'rkd-val ph'; btn.disabled = true; return; }
+  const val = parseInt(revQ); d.textContent = val.toLocaleString('es-ES') + ' km'; d.className = 'rkd-val';
+  const l = lastRev(curPlate); btn.disabled = !!(l && val <= l.km);
+}
+async function saveRev() {
+  const km = parseInt(revQ); if (!km) return;
+  const l = lastRev(curPlate);
+  if (l && km <= l.km) { alert('Los km deben ser mayores que el ultimo cambio (' + fmtKm(l.km) + ')'); return; }
+  const revDate = getDate('rev-date-input');
+  data[curPlate].history.push({ km: km, date: revDate, type: revType });
+  data[curPlate].lastSeen = { km: km, date: revDate };
+  await saveToFirebase(curPlate);
+  goTo('s-car'); renderCar();
+}
+
+// ---- EVT ----
+let evtQ = '';
+function goEvt() { evtQ = ''; document.getElementById('evt-plate-label').textContent = curPlate; document.getElementById('evt-date-input').value = localDT(); document.getElementById('evt-text-input').value = ''; document.getElementById('evt-save-btn').disabled = true; updateEvtDisp(); goTo('s-evt'); }
+function setEvtText(t) { document.getElementById('evt-text-input').value = t; updateEvtSaveBtn(); }
+function kpEvt(k) { if (k === 'C') evtQ = ''; else if (k === 'DEL') evtQ = evtQ.slice(0,-1); else if (evtQ.length < 7) evtQ += k; updateEvtDisp(); }
+function updateEvtDisp() {
+  const d = document.getElementById('evt-km-disp');
+  if (!evtQ) { d.textContent = 'Introduce los km abajo'; d.className = 'rkd-val ph'; }
+  else { d.textContent = parseInt(evtQ).toLocaleString('es-ES') + ' km'; d.className = 'rkd-val'; }
   updateEvtSaveBtn();
 }
-function updateEvtSaveBtn(){
-  const km=parseInt(evtQ),txt=document.getElementById('evt-text-input').value.trim();
-  document.getElementById('evt-save-btn').disabled=!(km>0&&txt.length>0);
+function updateEvtSaveBtn() {
+  const km = parseInt(evtQ), txt = document.getElementById('evt-text-input').value.trim();
+  document.getElementById('evt-save-btn').disabled = !(km > 0 && txt.length > 0);
 }
-function saveEvt(){
-  const km=parseInt(evtQ);if(!km)return;
-  const txt=document.getElementById('evt-text-input').value.trim();if(!txt)return;
-  if(!data[curPlate])data[curPlate]={history:[],lastSeen:null,events:[]};
-  if(!data[curPlate].events)data[curPlate].events=[];
-  data[curPlate].events.push({km:km,date:getDate('evt-date-input'),label:txt});
-  data[curPlate].lastSeen={km:km,date:getDate('evt-date-input')};
-  save();goTo('s-car');renderCar();
+async function saveEvt() {
+  const km = parseInt(evtQ); if (!km) return;
+  const txt = document.getElementById('evt-text-input').value.trim(); if (!txt) return;
+  if (!data[curPlate].events) data[curPlate].events = [];
+  const evtDate = getDate('evt-date-input');
+  data[curPlate].events.push({ km: km, date: evtDate, label: txt });
+  data[curPlate].lastSeen = { km: km, date: evtDate };
+  await saveToFirebase(curPlate);
+  goTo('s-car'); renderCar();
 }
 
-function goTo(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
-function goBack(){sq='';goTo('s-search');updateSearch();}
-updateSearch();
+// ---- NAV ----
+function goTo(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+  // Set keyboard mode
+  if (id === 's-search') activeKpMode = 'search';
+  else if (id === 's-km') activeKpMode = 'km';
+  else if (id === 's-rev') activeKpMode = 'rev';
+  else if (id === 's-evt') activeKpMode = 'evt';
+  else activeKpMode = null;
+}
+function goBack() { sq = ''; goTo('s-search'); updateSearch(); }
+
+// Make functions global for onclick handlers
+window.kp = kp; window.kpKm = kpKm; window.kpRev = kpRev; window.kpEvt = kpEvt;
+window.openCar = openCar; window.goBack = goBack; window.goKm = goKm; window.goRev = goRev; window.goEvt = goEvt;
+window.confirmKm = confirmKm; window.saveRev = saveRev; window.saveEvt = saveEvt;
+window.selRevType = selRevType; window.setEvtText = setEvtText; window.goTo = goTo;
+window.updateEvtSaveBtn = updateEvtSaveBtn;
+
+// ---- START ----
+startListeners();
 </script>
 </body>
 </html>
